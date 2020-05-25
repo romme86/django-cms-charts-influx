@@ -1,8 +1,9 @@
-================
-DjangoCMS_Charts
+
+Django CMS Chart <- InfluxDB
 ================
 
 A plugin for DjangoCMS that creates easy to use and fully customisable ChartJs (ver 1.0.2) charts - with a table and csv upload interface.
+You also have the possibility of live updating the charts from an InfluxDB stack.
 
 Quick start
 ===========
