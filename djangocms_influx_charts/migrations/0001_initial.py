@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import djangocms_charts.base.models
+import djangocms_influx_charts.base.models
 
 
 class Migration(migrations.Migration):
@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ChartJsBarModel',
             fields=[
-                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin')),
+                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin', on_delete=models.DO_NOTHING)),
                 ('name', models.CharField(max_length=256, verbose_name='Name')),
                 ('table_data', models.TextField(verbose_name='Chart Table data', blank=True)),
                 ('labels_top', models.BooleanField(default=True, help_text=b'here is some help', verbose_name='Labels top row')),
@@ -27,10 +27,10 @@ class Migration(migrations.Migration):
                 ('title_display', models.BooleanField(default=True, verbose_name='Display Title')),
                 ('legend_display', models.BooleanField(default=True, verbose_name='Display Legend')),
                 ('legend_position', models.CharField(max_length=100, verbose_name='Legend Position')),
-                ('chart_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart', blank=True)),
-                ('chart_container_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Container', blank=True)),
-                ('chart_title_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Title', blank=True)),
-                ('legend_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Legend', blank=True)),
+                ('chart_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart', blank=True)),
+                ('chart_container_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Container', blank=True)),
+                ('chart_title_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Title', blank=True)),
+                ('legend_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Legend', blank=True)),
                 ('option_scaleBeginAtZero', models.BooleanField(default=True, verbose_name='Scale should start at zero, or an order of magnitude down from the lowest value')),
                 ('option_scaleShowGridLines', models.BooleanField(default=True, verbose_name='Grid lines are shown across the chart')),
                 ('option_scaleGridLineColor', models.CharField(default=b'rgba(0,0,0,.05)', max_length=300, verbose_name='Colour of the grid lines', blank=True)),
@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ChartJsDoughnutModel',
             fields=[
-                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin')),
+                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin', on_delete=models.DO_NOTHING)),
                 ('name', models.CharField(max_length=256, verbose_name='Name')),
                 ('table_data', models.TextField(verbose_name='Chart Table data', blank=True)),
                 ('labels_top', models.BooleanField(default=True, help_text=b'here is some help', verbose_name='Labels top row')),
@@ -62,10 +62,10 @@ class Migration(migrations.Migration):
                 ('title_display', models.BooleanField(default=True, verbose_name='Display Title')),
                 ('legend_display', models.BooleanField(default=True, verbose_name='Display Legend')),
                 ('legend_position', models.CharField(max_length=100, verbose_name='Legend Position')),
-                ('chart_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart', blank=True)),
-                ('chart_container_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Container', blank=True)),
-                ('chart_title_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Title', blank=True)),
-                ('legend_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Legend', blank=True)),
+                ('chart_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart', blank=True)),
+                ('chart_container_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Container', blank=True)),
+                ('chart_title_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Title', blank=True)),
+                ('legend_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Legend', blank=True)),
                 ('option_segmentShowStroke', models.BooleanField(default=True, verbose_name='Show a stroke on each segment')),
                 ('option_segmentStrokeColor', models.CharField(default=b'#fff', max_length=300, verbose_name='The colour of each segment stroke', blank=True)),
                 ('option_segmentStrokeWidth', models.IntegerField(default=2, null=True, verbose_name='The width of each segment stroke', blank=True)),
@@ -124,7 +124,7 @@ class Migration(migrations.Migration):
                 ('tooltipXOffset', models.IntegerField(default=10, null=True, verbose_name='Pixel offset from point x to tooltip edge', blank=True)),
                 ('tooltipTemplate', models.CharField(max_length=300, verbose_name='Template string for single tooltips', blank=True)),
                 ('multiTooltipTemplate', models.CharField(default='<%= value %>', max_length=300, verbose_name='Template string for multiple tooltips', blank=True)),
-                ('site', models.ForeignKey(to='sites.Site')),
+                ('site', models.ForeignKey(to='sites.Site', on_delete=models.DO_NOTHING)),
             ],
             options={
                 'ordering': ['name'],
@@ -135,7 +135,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ChartJsLineModel',
             fields=[
-                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin')),
+                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin', on_delete=models.DO_NOTHING)),
                 ('name', models.CharField(max_length=256, verbose_name='Name')),
                 ('table_data', models.TextField(verbose_name='Chart Table data', blank=True)),
                 ('labels_top', models.BooleanField(default=True, help_text=b'here is some help', verbose_name='Labels top row')),
@@ -146,10 +146,10 @@ class Migration(migrations.Migration):
                 ('title_display', models.BooleanField(default=True, verbose_name='Display Title')),
                 ('legend_display', models.BooleanField(default=True, verbose_name='Display Legend')),
                 ('legend_position', models.CharField(max_length=100, verbose_name='Legend Position')),
-                ('chart_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart', blank=True)),
-                ('chart_container_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Container', blank=True)),
-                ('chart_title_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Title', blank=True)),
-                ('legend_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Legend', blank=True)),
+                ('chart_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart', blank=True)),
+                ('chart_container_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Container', blank=True)),
+                ('chart_title_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Title', blank=True)),
+                ('legend_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Legend', blank=True)),
                 ('option_scaleShowGridLines', models.BooleanField(default=True, verbose_name='Grid lines are shown across the chart')),
                 ('option_scaleGridLineColor', models.CharField(default=b'rgba(0,0,0,.05)', max_length=300, verbose_name='Colour of the grid lines', blank=True)),
                 ('option_scaleGridLineWidth', models.IntegerField(default=1, null=True, verbose_name='Width of the grid lines', blank=True)),
@@ -174,7 +174,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ChartJsPieModel',
             fields=[
-                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin')),
+                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin', on_delete=models.DO_NOTHING)),
                 ('name', models.CharField(max_length=256, verbose_name='Name')),
                 ('table_data', models.TextField(verbose_name='Chart Table data', blank=True)),
                 ('labels_top', models.BooleanField(default=True, help_text=b'here is some help', verbose_name='Labels top row')),
@@ -185,10 +185,10 @@ class Migration(migrations.Migration):
                 ('title_display', models.BooleanField(default=True, verbose_name='Display Title')),
                 ('legend_display', models.BooleanField(default=True, verbose_name='Display Legend')),
                 ('legend_position', models.CharField(max_length=100, verbose_name='Legend Position')),
-                ('chart_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart', blank=True)),
-                ('chart_container_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Container', blank=True)),
-                ('chart_title_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Title', blank=True)),
-                ('legend_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Legend', blank=True)),
+                ('chart_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart', blank=True)),
+                ('chart_container_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Container', blank=True)),
+                ('chart_title_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Title', blank=True)),
+                ('legend_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Legend', blank=True)),
                 ('option_segmentShowStroke', models.BooleanField(default=True, verbose_name='Show a stroke on each segment')),
                 ('option_segmentStrokeColor', models.CharField(default=b'#fff', max_length=300, verbose_name='The colour of each segment stroke', blank=True)),
                 ('option_segmentStrokeWidth', models.IntegerField(default=2, null=True, verbose_name='The width of each segment stroke', blank=True)),
@@ -207,7 +207,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ChartJsPolarModel',
             fields=[
-                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin')),
+                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin', on_delete=models.DO_NOTHING)),
                 ('name', models.CharField(max_length=256, verbose_name='Name')),
                 ('table_data', models.TextField(verbose_name='Chart Table data', blank=True)),
                 ('labels_top', models.BooleanField(default=True, help_text=b'here is some help', verbose_name='Labels top row')),
@@ -218,10 +218,10 @@ class Migration(migrations.Migration):
                 ('title_display', models.BooleanField(default=True, verbose_name='Display Title')),
                 ('legend_display', models.BooleanField(default=True, verbose_name='Display Legend')),
                 ('legend_position', models.CharField(max_length=100, verbose_name='Legend Position')),
-                ('chart_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart', blank=True)),
-                ('chart_container_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Container', blank=True)),
-                ('chart_title_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Title', blank=True)),
-                ('legend_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Legend', blank=True)),
+                ('chart_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart', blank=True)),
+                ('chart_container_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Container', blank=True)),
+                ('chart_title_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Title', blank=True)),
+                ('legend_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Legend', blank=True)),
                 ('option_scaleShowLabelBackdrop', models.BooleanField(default=True, verbose_name='Show a backdrop to the scale label')),
                 ('option_scaleBackdropColor', models.CharField(default=b'rgba(255,255,255,0.75)', max_length=300, verbose_name='The colour of the label backdrop', blank=True)),
                 ('option_scaleBeginAtZero', models.BooleanField(default=True, verbose_name='Scale should begin at zero')),
@@ -245,7 +245,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ChartJsRadarModel',
             fields=[
-                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin')),
+                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin', on_delete=models.DO_NOTHING)),
                 ('name', models.CharField(max_length=256, verbose_name='Name')),
                 ('table_data', models.TextField(verbose_name='Chart Table data', blank=True)),
                 ('labels_top', models.BooleanField(default=True, help_text=b'here is some help', verbose_name='Labels top row')),
@@ -256,10 +256,10 @@ class Migration(migrations.Migration):
                 ('title_display', models.BooleanField(default=True, verbose_name='Display Title')),
                 ('legend_display', models.BooleanField(default=True, verbose_name='Display Legend')),
                 ('legend_position', models.CharField(max_length=100, verbose_name='Legend Position')),
-                ('chart_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart', blank=True)),
-                ('chart_container_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Container', blank=True)),
-                ('chart_title_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Title', blank=True)),
-                ('legend_classes', models.TextField(default=djangocms_charts.base.models.get_chart_class, verbose_name='Additional classes for Legend', blank=True)),
+                ('chart_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart', blank=True)),
+                ('chart_container_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Container', blank=True)),
+                ('chart_title_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Chart Title', blank=True)),
+                ('legend_classes', models.TextField(default=djangocms_influx_charts.base.models.get_chart_class, verbose_name='Additional classes for Legend', blank=True)),
                 ('option_scaleShowLine', models.BooleanField(default=True, verbose_name='Show lines for each scale point')),
                 ('option_angleShowLineOut', models.BooleanField(default=True, verbose_name='Show the angle lines out of the radar')),
                 ('option_scaleShowLabels', models.BooleanField(default=False, verbose_name='Show labels on the scale')),

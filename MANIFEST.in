@@ -2,7 +2,7 @@
 include LICENSE
 
 # Include the data files
-recursive-include djangocms_charts/static *
-recursive-include djangocms_charts/templates *
+recursive-include djangocms_influx_charts/static *
+recursive-include djangocms_influx_charts/templates *
 
-recursive-exclude djangocms_charts/highcharts *
+recursive-exclude djangocms_influx_charts/highcharts *

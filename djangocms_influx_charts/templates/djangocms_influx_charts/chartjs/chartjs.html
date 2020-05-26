@@ -1,11 +1,11 @@
 {% load cms_tags staticfiles sekizai_tags i18n %}
 
 {% if error %}
-    <div class="alert alert-danger" role="alert">DjangoCMS_Charts Error: {{ error }}</div>
+    <div class="alert alert-danger" role="alert">djangocms_influx_charts Error: {{ error }}</div>
 {%  else %}
 
     {# Add to block one line per file to allow Sekizai to skip duplicates i.e. for multiple charts #}
-    {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'djangocms_charts/ext-render/chartjs-sass/css/chartjs-sass-default.min.css' %}">{% endaddtoblock %}
+    {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'djangocms_influx_charts/ext-render/chartjs-sass/css/chartjs-sass-default.min.css' %}">{% endaddtoblock %}
 
     {% spaceless %}
 
@@ -35,14 +35,14 @@
                  class="chart-legend {{ instance.legend_classes }}"
                  {% if instance.chart_width and instance.set_legend_width %} style="width:{{ instance.chart_width }}px;" {% endif %}></div>
         {% endif %}
-
+asdfasfdhgfgdhsdfgcvbfdghdfgh
     </div>
 
     {% endspaceless %}
 
     {# Add required scripts and custom function to build chart - one line each for Sekizai to skip duplicates #}
-    {%  addtoblock "js" %}<script src="{% static 'djangocms_charts/ext-render/Chart.js/1.0.2/Chart.js' %}"></script>{% endaddtoblock %}
-    {%  addtoblock "js" %}<script src="{% static 'djangocms_charts/ext-render/chartjs-sass/js/chartjs-sass.js' %}"></script>{% endaddtoblock %}
+    {%  addtoblock "js" %}<script src="{% static 'djangocms_influx_charts/ext-render/Chart.js/1.0.2/Chart.js' %}"></script>{% endaddtoblock %}
+    {%  addtoblock "js" %}<script src="{% static 'djangocms_influx_charts/ext-render/chartjs-sass/js/chartjs-sass.js' %}"></script>{% endaddtoblock %}
 
     {% if global_settings %}
         {%  addtoblock "js" %}

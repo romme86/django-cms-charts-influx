@@ -4,8 +4,8 @@ from django import forms
 from django.forms.models import ModelForm
 from django.utils.translation import ugettext_lazy as _
 
-from djangocms_charts.widgets import *
-from djangocms_charts.utils import *
+from djangocms_influx_charts.widgets import *
+from djangocms_influx_charts.utils import *
 from .consts import *
 
 class ChartsBaseInputForm(ModelForm):

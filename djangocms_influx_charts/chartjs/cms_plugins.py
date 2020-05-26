@@ -1,7 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 import json
-from djangocms_charts.base.cms_plugins import ChartsBasePlugin
-from djangocms_charts.utils import *
+from djangocms_influx_charts.base.cms_plugins import ChartsBasePlugin
+from djangocms_influx_charts.utils import *
 from .views.chart_views import ChartJsView
 from .forms import ChartJsInputForm
 from .models import *
@@ -11,7 +11,7 @@ from six import string_types
 class ChartJsBasePlugin(ChartsBasePlugin):
 
     module = _("ChartJs")
-    render_template = "djangocms_charts/chartjs/chartjs.html"
+    render_template = "djangocms_influx_charts/chartjs/chartjs.html"
 
     # Init requires same inputs as parent-parent
     def __init__(self, *args, **kwargs):

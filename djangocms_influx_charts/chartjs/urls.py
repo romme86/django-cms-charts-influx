@@ -1,7 +1,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 from django.conf.urls import include, url
-from djangocms_charts.chartjs.views.test_data_views import *
-from djangocms_charts.chartjs.views.data_views import get_chartjs_json
+from djangocms_influx_charts.chartjs.views.test_data_views import *
+from djangocms_influx_charts.chartjs.views.data_views import get_chartjs_json
 
 urlpatterns = [
 

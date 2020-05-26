@@ -4,7 +4,7 @@ from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from django.db.models import Q
-from djangocms_charts.utils import get_fields_and_values_from_obj
+from djangocms_influx_charts.utils import get_fields_and_values_from_obj
 
 def get_current_chartjs_global_settings():
     current_site = settings.SITE_ID

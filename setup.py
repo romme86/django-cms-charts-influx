@@ -8,16 +8,16 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as readme:
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='djangocms_charts',
-    version='1.3.0',
+    name='djangocms_influx_charts',
+    version='1.0.3',
     packages=find_packages(),
     include_package_data=True,
     license='MIT License',
-    description='DjangoCMS Plugin to add and edit ChartJs charts',
+    description='DjangoCMS Plugin to add and edit ChartJs charts extended with live data update from influxDB',
     long_description=README,
     long_description_content_type='text/markdown',
-    url='https://github.com/mcldev/djangocms-charts',
-    author='Michael Carder Ltd',
+    url='https://github.com/romme86/djangocms_influx_charts',
+    author='Francesco Romeo based on the work of Michael Carder Ltd',
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',

@@ -1,8 +1,8 @@
 from django import forms
 from .consts import *
 from .models import *
-from djangocms_charts.base.forms import ChartsBaseInputForm
-from djangocms_charts.widgets import *
+from djangocms_influx_charts.base.forms import ChartsBaseInputForm
+from djangocms_influx_charts.widgets import *
 
 class ChartJsInputForm(ChartsBaseInputForm):
 

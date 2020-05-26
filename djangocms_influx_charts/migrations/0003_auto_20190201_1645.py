@@ -9,14 +9,14 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('djangocms_charts', '0002_add_chart_position'),
+        ('djangocms_influx_charts', '0002_add_chart_position'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='chartjsbarmodel',
             name='cmsplugin_ptr',
-            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='djangocms_charts_chartjsbarmodel', serialize=False, to='cms.CMSPlugin'),
+            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='djangocms_influx_charts_chartjsbarmodel', serialize=False, to='cms.CMSPlugin'),
         ),
         migrations.AlterField(
             model_name='chartjsbarmodel',
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='chartjsdoughnutmodel',
             name='cmsplugin_ptr',
-            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='djangocms_charts_chartjsdoughnutmodel', serialize=False, to='cms.CMSPlugin'),
+            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='djangocms_influx_charts_chartjsdoughnutmodel', serialize=False, to='cms.CMSPlugin'),
         ),
         migrations.AlterField(
             model_name='chartjsdoughnutmodel',
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='chartjslinemodel',
             name='cmsplugin_ptr',
-            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='djangocms_charts_chartjslinemodel', serialize=False, to='cms.CMSPlugin'),
+            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='djangocms_influx_charts_chartjslinemodel', serialize=False, to='cms.CMSPlugin'),
         ),
         migrations.AlterField(
             model_name='chartjslinemodel',
@@ -96,7 +96,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='chartjspiemodel',
             name='cmsplugin_ptr',
-            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='djangocms_charts_chartjspiemodel', serialize=False, to='cms.CMSPlugin'),
+            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='djangocms_influx_charts_chartjspiemodel', serialize=False, to='cms.CMSPlugin'),
         ),
         migrations.AlterField(
             model_name='chartjspiemodel',
@@ -126,7 +126,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='chartjspolarmodel',
             name='cmsplugin_ptr',
-            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='djangocms_charts_chartjspolarmodel', serialize=False, to='cms.CMSPlugin'),
+            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='djangocms_influx_charts_chartjspolarmodel', serialize=False, to='cms.CMSPlugin'),
         ),
         migrations.AlterField(
             model_name='chartjspolarmodel',
@@ -161,7 +161,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='chartjsradarmodel',
             name='cmsplugin_ptr',
-            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='djangocms_charts_chartjsradarmodel', serialize=False, to='cms.CMSPlugin'),
+            field=models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='djangocms_influx_charts_chartjsradarmodel', serialize=False, to='cms.CMSPlugin'),
         ),
         migrations.AlterField(
             model_name='chartjsradarmodel',

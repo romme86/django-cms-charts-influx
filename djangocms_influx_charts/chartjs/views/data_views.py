@@ -2,7 +2,7 @@
 """Tools to build Line charts parameters."""
 from django.shortcuts import get_object_or_404
 from .chart_views import ChartJsView
-from djangocms_charts.chartjs.models import ChartJsBaseModel
+from djangocms_influx_charts.chartjs.models import ChartJsBaseModel
 
 def get_chartjs_json(request, chartjsmodel_id):
     #Get Chart Data

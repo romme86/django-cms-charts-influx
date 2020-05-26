@@ -1,5 +1,5 @@
-from djangocms_charts.base.views.chart_view import BaseChartView
-from djangocms_charts.chartjs.consts import *
+from djangocms_influx_charts.base.views.chart_view import BaseChartView
+from djangocms_influx_charts.chartjs.consts import *
 
 class ChartJsView(BaseChartView):
 

@@ -1,6 +1,6 @@
 from .json_view import JSONView
 import json
-from djangocms_charts.utils import *
+from djangocms_influx_charts.utils import *
 from six import string_types
 
 class BaseChartView(JSONView):

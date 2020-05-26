@@ -13,7 +13,7 @@ class ChartsBasePlugin(CMSPluginBase):
         (_('Headers'), {
             'fields': (('labels_top', 'labels_left', 'data_series_format'),)
         }),
-        (_("Input Table or CSV"), {
+        (_("Input Table or CSV TEST"), {
             'fields': ('table_data', 'csv_upload')
         }),
         (_("Legend Settings"), {
@@ -63,7 +63,7 @@ class ChartsBasePlugin(CMSPluginBase):
     # Required if this plugin is within a parent text plugin - inoperable otherwise.
     # http://www.megaicons.net/iconspack-624/21477/
     def icon_src(self, instance):
-        return settings.STATIC_URL + "djangocms_charts/img/chart-icon.png"
+        return settings.STATIC_URL + "djangocms_influx_charts/img/chart-icon.png"
 
     def response_change(self, request, obj):
         response = super(ChartsBasePlugin, self).response_change(request, obj)

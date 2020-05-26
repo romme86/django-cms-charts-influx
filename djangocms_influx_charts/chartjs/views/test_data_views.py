@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Tools to build Line charts parameters."""
 from .chart_views import ChartJsView
-from djangocms_charts.chartjs.consts import *
+from djangocms_influx_charts.chartjs.consts import *
 
 # Replace labels and data with sample data
 class Test_Dataset_Instance(object):

@@ -7,14 +7,14 @@ You also have the possibility of live updating the charts from an InfluxDB stack
 
 Quick start
 ===========
-1. Add 'djangocms_charts' to your INSTALLED_APPS setting like this::
+1. Add 'djangocms_influx_charts' to your INSTALLED_APPS setting like this::
 
     INSTALLED_APPS = [
         ...
-        'djangocms_charts',
+        'djangocms_influx_charts',
     ]
 
-2. Run `python manage.py migrate` to create the djangocms_charts models.
+2. Run `python manage.py migrate` to create the djangocms_influx_charts models.
 
 3. Ensure you have your own version of jQuery added to block 'js'. See here: https://django-sekizai.readthedocs.io/en/latest/#example
 

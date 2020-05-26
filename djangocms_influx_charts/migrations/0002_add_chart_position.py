@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('djangocms_charts', '0001_initial'),
+        ('djangocms_influx_charts', '0001_initial'),
     ]
 
     operations = [

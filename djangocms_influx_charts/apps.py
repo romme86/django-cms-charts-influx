@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 class ChartsConfig(AppConfig):
-    name = 'djangocms_charts'
+    name = 'djangocms_influx_charts'
     verbose_name = 'DjangoCMS Charts'

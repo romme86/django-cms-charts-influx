@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from djangocms_charts.base.models import ChartsBaseModel
+from djangocms_influx_charts.base.models import ChartsBaseModel
 from .consts import *
 
 
