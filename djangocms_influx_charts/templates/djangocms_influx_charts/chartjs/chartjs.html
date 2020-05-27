@@ -35,7 +35,6 @@
                  class="chart-legend {{ instance.legend_classes }}"
                  {% if instance.chart_width and instance.set_legend_width %} style="width:{{ instance.chart_width }}px;" {% endif %}></div>
         {% endif %}
-asdfasfdhgfgdhsdfgcvbfdghdfgh
     </div>
 
     {% endspaceless %}
@@ -57,6 +56,25 @@ asdfasfdhgfgdhsdfgcvbfdghdfgh
     {%  addtoblock "js" %}
         <script>
             $(document).ready(function () {
+
+                // if the influx configuration is not empty, initialize the loop to ask data
+                {% if instance.influx_db_data_host_port and instance.influx_db_data_database and instance.influx_db_data_select and instance.influx_db_data_from and instance.influx_db_data_time_span%}
+                    console.log("influx configuration found");
+                    const influxDB_host_port = {{ instance.influx_db_data_host_port }};
+                    const database = {{ instance.influx_db_data_database }};
+                    const select_query = {{ instance.influx_db_data_select }};
+                    const from_query = {{ instance.influx_db_data_from }};
+                    const time_group_by = {{instance.influx_db_data_time_to_group_by}};
+                    const time_lower_bound = $.now() - {{ instance.influx_db_data_time_span }};
+                    const time_upper_bound = $.now();
+                    $.get("http://" + influxDB_host_port + "/query?db=" + database + "&epoch=ms&q=SELECT+" + select_query + "+FROM+" + from_query + "+WHERE+time+%3E+" + time_lower_bound + "s+and+time+%3C+" + time_upper_bound + "s+GROUP+BY+time(" + time_group_by + "s)").done(
+                       function (data) {
+                           console.log("response from influx", data);
+                           // TODO format the data (take only the "select_query" part, usually the "value" field in the json
+                           // TODO implement the graph construction for the returned data
+                    });
+                {% endif %}
+
 
                 var chart_{{ instance.id }} = null;
                 build_chart_{{ instance.id }}();

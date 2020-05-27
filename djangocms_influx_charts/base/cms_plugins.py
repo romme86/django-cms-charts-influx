@@ -13,7 +13,13 @@ class ChartsBasePlugin(CMSPluginBase):
         (_('Headers'), {
             'fields': (('labels_top', 'labels_left', 'data_series_format'),)
         }),
-        (_("Input Table or CSV TEST"), {
+        (_("InfluxDB instance host:port"), {
+            'fields': ('influx_db_data_host_port',)
+        }),
+        (_("InfluxDB query (you can take this from chronograph)"), {
+            'fields': ('influx_db_data_chronograph_query',)
+        }),
+        (_("Input Table or CSV"), {
             'fields': ('table_data', 'csv_upload')
         }),
         (_("Legend Settings"), {

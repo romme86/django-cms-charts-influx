@@ -12,6 +12,8 @@ class ChartsBaseModel(CMSPlugin):
     Charts Model
     """
     name = models.CharField(_("Name"), max_length=256)
+    influx_db_data_host_port = models.TextField(_("InfluxDB data host and port"), blank=True)
+    influx_db_data_chronograph_query = models.TextField(_("InfluxDB data query"), blank=True)
     chart_type = None
 
     # Table data
