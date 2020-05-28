@@ -42,6 +42,7 @@
     {# Add required scripts and custom function to build chart - one line each for Sekizai to skip duplicates #}
     {%  addtoblock "js" %}<script src="{% static 'djangocms_influx_charts/ext-render/Chart.js/1.0.2/Chart.js' %}"></script>{% endaddtoblock %}
     {%  addtoblock "js" %}<script src="{% static 'djangocms_influx_charts/ext-render/chartjs-sass/js/chartjs-sass.js' %}"></script>{% endaddtoblock %}
+    {%  addtoblock "js" %}<script src="{% static 'djangocms_influx_charts/ext-input/js/moment.min.js' %}"></script>{% endaddtoblock %}
 
     {% if global_settings %}
         {%  addtoblock "js" %}
@@ -62,7 +63,16 @@
                 {% if instance.influx_db_data_host_port and instance.influx_db_data_database and instance.influx_db_data_select and instance.influx_db_data_from and instance.influx_db_data_time_span%}
                     console.log("influx configuration found");
                     const refresh_time = {{ instance.influx_db_data_reset_time }};
-                    // TODO implement loop every refresh time
+                    sendRequestToInflux();
+                    setInterval(function(){
+                        sendRequestToInflux();
+                    }, refresh_time * 1000);
+                {% else %}
+                    build_chart_{{ instance.id }}(data_from_db);
+                    set_title_style();
+                {% endif %}
+
+                function sendRequestToInflux() {
                     const influxDB_host_port = "{{ instance.influx_db_data_host_port }}";
                     const database = "{{ instance.influx_db_data_database }}";
                     const select_query = "{{ instance.influx_db_data_select }}";
@@ -77,45 +87,40 @@
                     const time_upper_bound = Math.round($.now() / 1000);
                     const get_request = "http://" + influxDB_host_port + "/query?db=" + database + "&epoch=ms&q=SELECT+" + select_query + "+FROM+" + from_query_uri_encoded + "+WHERE+time+%3E+" + time_lower_bound + "s+and+time+%3C+" + time_upper_bound + "s+and+"+ where_query_uri_encoded +"+GROUP+BY+time(" + time_group_by + "s)";
                     console.log("get request is:", get_request);
+                    data_from_db = {{ data|safe }};
                     $.get(get_request).done(
-                       function (data) {
-                           console.log("response from influx", data);
-                           if (
-                               data !== null
-                               && data.results[0] !== null
-                               && data.results[0].series[0] !== null
-                               && data.results[0].series[0].values !== null) {
-                               // TODO format the data (take only the "select_query" part, usually the "value" field in the json
-                               const valuesArray = data.results[0].series[0].values;
-                               // TODO implement the graph construction for the returned data
+                           function (data) {
+                               console.log("response from influx", data);
                                if (
-                                   data_from_db !== null
-                                   && data_from_db.datasets !== null
-                                   && data_from_db.datasets[0] !== null
-                                   && data_from_db.datasets[0] !== null
-                               ) {
-                                   data_from_db.labels = Array();
-                                   data_from_db.datasets[0].data = Array();
-                                   valuesArray.forEach((item, index) => {
-                                       // assume the first column is the time
-                                       var timeLabel = Math.round(($.now() - item[0]) / 1000);
-                                       if (item[1] !== null) {
-                                           data_from_db.labels.push(timeLabel.toString());
-                                           data_from_db.datasets[0].data.push(item[1]);
-                                       }
-                                   });
-                                   console.log("data to graph", data_from_db);
-                               } else {
-                                   console.log("missing data from db to reinitialize");
+                                   data !== null
+                                   && data.results[0] !== null
+                                   && data.results[0].series[0] !== null
+                                   && data.results[0].series[0].values !== null) {
+                                   const valuesArray = data.results[0].series[0].values;
+                                   if (
+                                       data_from_db !== null
+                                       && data_from_db.datasets !== null
+                                       && data_from_db.datasets[0] !== null
+                                       && data_from_db.datasets[0] !== null
+                                   ) {
+                                       data_from_db.labels = Array();
+                                       data_from_db.datasets[0].data = Array();
+                                       valuesArray.forEach((item, index) => {
+                                           // assume the first column is the time
+                                           if (item[1] !== null) {
+                                               data_from_db.labels.push(new moment(item[0]).format("HH:mm"));
+                                               data_from_db.datasets[0].data.push(item[1]);
+                                           }
+                                       });
+                                       console.log("data to graph", data_from_db);
+                                   } else {
+                                       console.log("missing data from db to reinitialize");
+                                   }
+                                   build_chart_{{ instance.id }}(data_from_db);
+                                   set_title_style();
                                }
-                               build_chart_{{ instance.id }}(data_from_db);
-                               set_title_style();
-                           }
-                    });
-                {% else %}
-                    build_chart_{{ instance.id }}(data_from_db);
-                    set_title_style();
-                {% endif %}
+                        });
+                }
 
 
                 function build_chart_{{ instance.id }}(data) {
