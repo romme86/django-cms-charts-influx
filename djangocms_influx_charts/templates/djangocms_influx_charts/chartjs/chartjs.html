@@ -60,25 +60,44 @@
                 // if the influx configuration is not empty, initialize the loop to ask data
                 {% if instance.influx_db_data_host_port and instance.influx_db_data_database and instance.influx_db_data_select and instance.influx_db_data_from and instance.influx_db_data_time_span%}
                     console.log("influx configuration found");
-                    const influxDB_host_port = {{ instance.influx_db_data_host_port }};
-                    const database = {{ instance.influx_db_data_database }};
-                    const select_query = {{ instance.influx_db_data_select }};
-                    const from_query = {{ instance.influx_db_data_from }};
+                    const refresh_time = {{ instance.influx_db_data_reset_time }};
+                    // TODO implement loop every refresh time
+                    const influxDB_host_port = "{{ instance.influx_db_data_host_port }}";
+                    const database = "{{ instance.influx_db_data_database }}";
+                    const select_query = "{{ instance.influx_db_data_select }}";
+                    const from_query = "{{ instance.influx_db_data_from }}";
+                    const from_query_html_parsed = $.parseHTML(from_query);
+                    const from_query_uri_encoded = encodeURI(from_query_html_parsed[0].data);
+                    const where_query = "{{ instance.influx_db_data_where }}";
+                    const where_query_html_parsed = $.parseHTML(where_query);
+                    const where_query_uri_encoded = encodeURI(where_query_html_parsed[0].data);
                     const time_group_by = {{instance.influx_db_data_time_to_group_by}};
-                    const time_lower_bound = $.now() - {{ instance.influx_db_data_time_span }};
-                    const time_upper_bound = $.now();
-                    $.get("http://" + influxDB_host_port + "/query?db=" + database + "&epoch=ms&q=SELECT+" + select_query + "+FROM+" + from_query + "+WHERE+time+%3E+" + time_lower_bound + "s+and+time+%3C+" + time_upper_bound + "s+GROUP+BY+time(" + time_group_by + "s)").done(
+                    const time_lower_bound = Math.round($.now() / 1000) - {{ instance.influx_db_data_time_span }};
+                    const time_upper_bound = Math.round($.now() / 1000);
+                    const get_request = "http://" + influxDB_host_port + "/query?db=" + database + "&epoch=ms&q=SELECT+" + select_query + "+FROM+" + from_query_uri_encoded + "+WHERE+time+%3E+" + time_lower_bound + "s+and+time+%3C+" + time_upper_bound + "s+and+"+ where_query_uri_encoded +"+GROUP+BY+time(" + time_group_by + "s)";
+                    console.log("get request is:", get_request);
+                    $.get(get_request).done(
                        function (data) {
                            console.log("response from influx", data);
-                           // TODO format the data (take only the "select_query" part, usually the "value" field in the json
-                           // TODO implement the graph construction for the returned data
+                           if (
+                               data !== null
+                               && data.results[0] !== null
+                               && data.results[0].series[0] !== null
+                               && data.results[0].series[0].values !== null) {
+                               // TODO format the data (take only the "select_query" part, usually the "value" field in the json
+                               const valuesArray = data.results[0].series[0].values;
+
+
+                               // TODO implement the graph construction for the returned data
+                           }
                     });
+                {% else %}
+                    var chart_{{ instance.id }} = null;
+                    build_chart_{{ instance.id }}();
+                    set_title_style();
                 {% endif %}
 
 
-                var chart_{{ instance.id }} = null;
-                build_chart_{{ instance.id }}();
-                set_title_style();
 
                 function build_chart_{{ instance.id }}() {
 

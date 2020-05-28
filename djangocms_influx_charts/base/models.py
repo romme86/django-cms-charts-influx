@@ -12,8 +12,14 @@ class ChartsBaseModel(CMSPlugin):
     Charts Model
     """
     name = models.CharField(_("Name"), max_length=256)
-    influx_db_data_host_port = models.TextField(_("InfluxDB data host and port"), blank=True)
-    influx_db_data_chronograph_query = models.TextField(_("InfluxDB data query"), blank=True)
+    influx_db_data_host_port = models.CharField(_("InfluxDB host and port"), max_length=3000, blank=True)
+    influx_db_data_reset_time = models.CharField(_("InfluxDB reset time"), max_length=3000, blank=True)
+    influx_db_data_database = models.CharField(_("InfluxDB database name"), max_length=3000, blank=True)
+    influx_db_data_select = models.CharField(_("InfluxDB SELECT arguments"), max_length=3000, blank=True)
+    influx_db_data_from = models.CharField(_("InfluxDB FROM arguments"), max_length=3000, blank=True)
+    influx_db_data_where = models.CharField(_("InfluxDB WHERE arguments"), max_length=3000, blank=True)
+    influx_db_data_time_span = models.CharField(_("Influx DB time span"), max_length=3000, blank=True)
+    influx_db_data_time_to_group_by = models.CharField(_("Influx DB Group by"), max_length=3000, blank=True)
     chart_type = None
 
     # Table data

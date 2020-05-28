@@ -13,11 +13,8 @@ class ChartsBasePlugin(CMSPluginBase):
         (_('Headers'), {
             'fields': (('labels_top', 'labels_left', 'data_series_format'),)
         }),
-        (_("InfluxDB instance host:port"), {
-            'fields': ('influx_db_data_host_port',)
-        }),
-        (_("InfluxDB query (you can take this from chronograph)"), {
-            'fields': ('influx_db_data_chronograph_query',)
+        (_("InfluxDB configuration, you can take SELECT usually mean(value), FROM and WHERE from Chronograph"), {
+            'fields': ('influx_db_data_reset_time', 'influx_db_data_database', 'influx_db_data_host_port', 'influx_db_data_select', 'influx_db_data_from', 'influx_db_data_where', 'influx_db_data_time_span', 'influx_db_data_time_to_group_by',)
         }),
         (_("Input Table or CSV"), {
             'fields': ('table_data', 'csv_upload')
