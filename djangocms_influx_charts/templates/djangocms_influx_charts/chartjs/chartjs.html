@@ -56,7 +56,8 @@
     {%  addtoblock "js" %}
         <script>
             $(document).ready(function () {
-
+                var chart_{{ instance.id }} = null;
+                var data_from_db = {{ data|safe }};
                 // if the influx configuration is not empty, initialize the loop to ask data
                 {% if instance.influx_db_data_host_port and instance.influx_db_data_database and instance.influx_db_data_select and instance.influx_db_data_from and instance.influx_db_data_time_span%}
                     console.log("influx configuration found");
@@ -86,23 +87,41 @@
                                && data.results[0].series[0].values !== null) {
                                // TODO format the data (take only the "select_query" part, usually the "value" field in the json
                                const valuesArray = data.results[0].series[0].values;
-
-
                                // TODO implement the graph construction for the returned data
+                               if (
+                                   data_from_db !== null
+                                   && data_from_db.datasets !== null
+                                   && data_from_db.datasets[0] !== null
+                                   && data_from_db.datasets[0] !== null
+                               ) {
+                                   data_from_db.labels = Array();
+                                   data_from_db.datasets[0].data = Array();
+                                   valuesArray.forEach((item, index) => {
+                                       // assume the first column is the time
+                                       var timeLabel = Math.round(($.now() - item[0]) / 1000);
+                                       if (item[1] !== null) {
+                                           data_from_db.labels.push(timeLabel.toString());
+                                           data_from_db.datasets[0].data.push(item[1]);
+                                       }
+                                   });
+                                   console.log("data to graph", data_from_db);
+                               } else {
+                                   console.log("missing data from db to reinitialize");
+                               }
+                               build_chart_{{ instance.id }}(data_from_db);
+                               set_title_style();
                            }
                     });
                 {% else %}
-                    var chart_{{ instance.id }} = null;
-                    build_chart_{{ instance.id }}();
+                    build_chart_{{ instance.id }}(data_from_db);
                     set_title_style();
                 {% endif %}
 
 
-
-                function build_chart_{{ instance.id }}() {
+                function build_chart_{{ instance.id }}(data) {
 
                     //Get data and format colours based on ChartJs-Sass
-                    var data = {{ data|safe }};
+                    {#var data = {{ data|safe }};#}
                     data = parse_css_colors("{{ instance.chart_id }}", "{{ instance.chart_type.lower }}", data);
 
                     var ctx = $("#{{ instance.chart_id }}").get(0).getContext("2d");
